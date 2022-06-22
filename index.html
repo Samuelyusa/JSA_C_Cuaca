@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<title>Cuaca Hari Ini</title>
+	</head>
+	<body>
+		<nav class="navbar-1">
+			<div class="nav-container">
+				<div class="nav-item-left"><h1>CUACA HARI INI</h1></div>
+				<div class="nav-main-item">
+					<div class="nav-search">
+						<input
+							class="input-keyword"
+							type="text"
+							placeholder="Masukkan Nama Kota"
+							size="25"
+							id="input-keyword"
+						/>
+						<button
+							class="search-btn"
+							onclick="fetchData()"
+							type="button"
+							id="button"
+						>
+							<img
+								id="search-img"
+								src="assets/icon/find.png"
+								alt=""
+							/>
+						</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<main>
+			<div class="container-back">
+				<div class="main-container shadow">
+					<div class="container main-item">
+						<div class="item first-item shadow">
+							<div class="header-card headline">
+								<h4 id="location"></h4>
+							</div>
+							<div class="main-element">
+								<div class="element-loct">
+									<p>
+										<span id="current_temp"> </span>terasa
+										seperti
+										<span id="feels_temp"> </span>
+									</p>
+									<p id="title_last_update">
+										Terakhir diperbaharui pada
+										<span id="last_update"></span>
+									</p>
+								</div>
+								<div class="icon-element">
+									<img id="icon-weather" src="" alt="" />
+									<p id="icon-title"></p>
+								</div>
+							</div>
+						</div>
+						<div class="item second-item shadow">
+							<div class="header-card">
+								<h4 class="header-title-card">
+									Prakiraan Hari Ini Untuk
+									<span id="location2"></span>
+								</h4>
+							</div>
+							<div class="astro row">
+								<div class="column sunrise">
+									<div class="Title sunrise">
+										<h6>Matahari Terbit</h6>
+									</div>
+									<div class="Icon Spagi">
+										<img
+											src="assets/icon/sunrise.png"
+											alt="sunrise"
+										/>
+									</div>
+									<div class="Timebox">
+										<p class="Time SunriseTime"></p>
+									</div>
+								</div>
+								<div class="column sunset">
+									<div class="Title sunset">
+										<h6>Matahari Terbenam</h6>
+									</div>
+									<div class="Icon ISunset">
+										<img
+											src="assets/icon/sunsets.png"
+											alt="sunset"
+										/>
+									</div>
+									<div class="Timebox">
+										<p class="Time SunsetTime"></p>
+									</div>
+								</div>
+								<div class="column moonrise">
+									<div class="Title moonrise">
+										<h6>Bulan Terbit</h6>
+									</div>
+									<div class="Icon Imoonrise">
+										<img
+											src="assets/icon/moonrise.png"
+											alt="moonrise"
+										/>
+									</div>
+									<div class="Timebox">
+										<p class="Time MoonriseTime"></p>
+									</div>
+								</div>
+								<div class="column moonset">
+									<div class="Title moonset">
+										<h6>Bulan Terbenam</h6>
+									</div>
+									<div class="Icon Imoonset">
+										<img
+											src="assets/icon/moonset.png"
+											alt="moonset"
+										/>
+									</div>
+									<div class="Timebox">
+										<p class="Time MoonsetTime"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item third-item shadow">
+							<div class="header-card">
+								<h4 class="header-title-card">
+									Cuaca Hari Ini di
+									<span id="location3"></span>
+								</h4>
+							</div>
+							<div class="main-element">
+								<div class="forecast-cont left">
+									<div class="forecast temp">
+										<div class="icon-forecast">
+											<img
+												src="assets/icon/temperature.png"
+												alt="Suhu maksimal/minimal"
+												class="icon-forecast"
+											/>
+										</div>
+										<div class="title-forecast">
+											<p>Suhu Maks/Min</p>
+										</div>
+										<div class="value-forecast">
+											<p id="temp"></p>
+										</div>
+									</div>
+									<div class="forecast humidity">
+										<div class="icon-forecast">
+											<img
+												src="assets/icon/humidity.png"
+												alt="Tingkat kelembaban"
+												class="icon-forecast"
+											/>
+										</div>
+										<div class="title-forecast">
+											<p>Kelembaban</p>
+										</div>
+										<div class="value-forecast">
+											<p id="humid"></p>
+										</div>
+									</div>
+									<div class="forecast pressure">
+										<div class="icon-forecast">
+											<img
+												src="assets/icon/resilience.png"
+												alt="Tekanan"
+												class="icon-forecast"
+											/>
+										</div>
+										<div class="title-forecast">
+											<p>Tekanan Udara</p>
+										</div>
+										<div class="value-forecast">
+											<p id="air-press"></p>
+										</div>
+									</div>
+									<div class="forecast visibility">
+										<div class="icon-forecast">
+											<img
+												src="assets/icon/view.png"
+												alt="visibility"
+												class="icon-forecast"
+											/>
+										</div>
+										<div class="title-forecast">
+											<p>Jarak Pandang</p>
+										</div>
+										<div class="value-forecast">
+											<p id="visibility"></p>
+										</div>
+									</div>
+								</div>
+								<div class="forecast-cont right">
+									<div class="forecast wind">
+										<div class="icon-forecast">
+											<img
+												src="assets/icon/wind-sign.png"
+												alt="arah angin"
+												class="icon-forecast"
+											/>
+										</div>
+										<div class="title-forecast">
+											<p>Arah & Kecepatan Angin</p>
+										</div>
+										<div class="value-forecast">
+											<p id="wind"></p>
+										</div>
+									</div>
+									<div class="forecast rain">
+										<div class="icon-forecast">
+											<img
+												src="assets/icon/rainy.png"
+												alt="Kemungkinan Hujan"
+												class="icon-forecast"
+											/>
+										</div>
+										<div class="title-forecast">
+											<p>Kemungkinan Hujan</p>
+										</div>
+										<div class="value-forecast">
+											<p id="rainy"></p>
+										</div>
+									</div>
+									<div class="forecast uv-index">
+										<div class="icon-forecast">
+											<img
+												src="assets/icon/uv-index.png"
+												alt="UV Index"
+												class="icon-forecast"
+											/>
+										</div>
+										<div class="title-forecast">
+											<p>Indeks UV</p>
+										</div>
+										<div class="value-forecast">
+											<p id="uv-index"></p>
+										</div>
+									</div>
+									<div class="forecast moon-phase">
+										<div class="icon-forecast">
+											<img
+												src="assets/icon/moon-phases.png"
+												alt="Fase Bulan"
+												class="icon-forecast"
+											/>
+										</div>
+										<div class="title-forecast">
+											<p>Fase Bulan</p>
+										</div>
+										<div class="value-forecast">
+											<p id="moonphase"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item bonus-item shadow">
+							<div class="header-card">
+								<h4 class="header-title-card">
+									Lelucon Hari Ini Untuk Kota
+									<span id="location4"></span>
+								</h4>
+							</div>
+							<div class="main-element-bonus">
+								<div class="jokes">
+									<p id="Jokes"></p>
+								</div>
+								<div class="jokes"><p id="subtitle"></p></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div id="footerWrap">
+				<p>
+					The icon is created by
+					<a
+						href="https://www.flaticon.com/free-icons/find"
+						title="find icons"
+						target="_blank"
+						>Freepik - Flaticon</a
+					>
+				</p>
+				<p>
+					<span
+						>The Weather API is Powered by
+						<a
+							href="https://www.weatherapi.com/"
+							title="Free Weather API"
+							target="_blank"
+							>WeatherAPI.com</a
+						></span
+					>
+					<span>
+						and The Joke Generator generated by
+						<a href="https://sv443.net/jokeapi/v2/" target="_blank"
+							>SV443.net</a
+						>
+					</span>
+				</p>
+				<p>
+					Translated by
+					<a
+						href="https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/microsoft-translator-text/"
+						target="_blank"
+						>Microsoft Translator Text</a
+					>
+					by Microsoft Azure
+				</p>
+				<p>
+					Develop with &hearts; by
+					<a
+						href="https://www.linkedin.com/in/samuel-yusa-a-p-r-s-85533611a/"
+						style="text-decoration: none; color: yellow"
+						target="_blank"
+						>Samuel Yusa</a
+					>
+				</p>
+			</div>
+		</footer>
+		<script src="script.js?a=${math.random()}"></script>
+	</body>
+</html>
